@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/jobs")
 public class JobController {
 
     private List<Job> jobs = new ArrayList<>();
 
-    @GetMapping
+    @GetMapping("/jobs")
     public List<Job> findAll() {
         return jobs;
     }
