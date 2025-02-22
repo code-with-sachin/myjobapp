@@ -8,16 +8,23 @@ import java.util.List;
 @RestController
 public class JobController {
 
-    private List<Job> jobs = new ArrayList<>();
+    //No need to initialize this, as we have annotated the JobServiceImpl with @Service.
+    // So spring boot will manage the object creation & inject it at run time -> For this just define a constructor (refer below jobService)
+    private JobService jobService;
+
+    //Now spring boot will take care of object creation at runtime for this controller & will initialize it
+    public JobController(JobService jobService) {
+        this.jobService = jobService;
+    }
 
     @GetMapping("/jobs")
     public List<Job> findAll() {
-        return jobs;
+        return jobService.findAll();
     }
 
     @PostMapping("/jobs")
     public String createjob(@RequestBody Job job) {
-        jobs.add(job);
+        jobService.createJob(job);
         return "Job created successfully!";
     }
 

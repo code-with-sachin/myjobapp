@@ -2,21 +2,23 @@ package com.sachinsk.myjobapp.job.impl;
 
 import com.sachinsk.myjobapp.job.Job;
 import com.sachinsk.myjobapp.job.JobService;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class JobServiceImpl implements JobService {
 
     private List<Job> jobs = new ArrayList<>();
 
     @Override
     public List<Job> findAll() {
-        return List.of();
+        return jobs;
     }
 
     @Override
-    public void createJob() {
-
+    public void createJob(Job job) {
+        jobs.add(job);
     }
 }
