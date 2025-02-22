@@ -28,4 +28,11 @@ public class JobController {
         return "Job created successfully!";
     }
 
+    //Note the {id} is the Query parameters
+    @GetMapping("/jobs/{id}")
+    public Job findJobById(@PathVariable(value = "id") Long id) {
+        Job job = jobService.getJobById(id);
+        return job;
+    }
+
 }
