@@ -20,14 +20,12 @@ public class JobController {
     }
 
     @GetMapping
-   // @RequestMapping(value = "/jobs", method = RequestMethod.GET)
     public ResponseEntity<List<Job>> findAll() {
         return ResponseEntity.ok(jobService.findAll());
         // return new ResponseEntity<>(jobService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
-    //@RequestMapping(value = "/jobs", method = RequestMethod.POST)
     public ResponseEntity<String> createjob(@RequestBody Job job) {
         jobService.createJob(job);
         return new ResponseEntity<>("Job created successfully!", HttpStatus.CREATED);
@@ -35,7 +33,6 @@ public class JobController {
 
     //Note the {id} is the Query parameters
     @GetMapping("/{id}")
-    //@RequestMapping(value = "/jobs/{id}", method = RequestMethod.GET)
     public ResponseEntity<Job> findJobById(@PathVariable(value = "id") Long id) {
         Job job = jobService.getJobById(id);
         if (job != null) {
@@ -45,7 +42,6 @@ public class JobController {
     }
 
     @DeleteMapping("/{id}")
-    //@RequestMapping(value = "/jobs/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteJob(@PathVariable(value = "id") Long id) {
         boolean deleted = jobService.deleteJobById(id);
         if (deleted) {
@@ -55,7 +51,6 @@ public class JobController {
     }
 
     @PutMapping("/{id}")
-    //@RequestMapping(value = "/jobs/{id}", method = RequestMethod.PUT)
     public ResponseEntity<String> updatejob(@PathVariable Long id, @RequestBody Job updatedJob) {
         boolean updated = jobService.updateJobById(id, updatedJob);
         if (updated) {
