@@ -1,8 +1,9 @@
 package com.sachinsk.myjobapp.job;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,21 +19,25 @@ public class JobController {
     }
 
     @GetMapping("/jobs")
-    public List<Job> findAll() {
-        return jobService.findAll();
+    public ResponseEntity<List<Job>> findAll() {
+        return ResponseEntity.ok(jobService.findAll());
+        // return new ResponseEntity<>(jobService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/jobs")
-    public String createjob(@RequestBody Job job) {
+    public ResponseEntity<String> createjob(@RequestBody Job job) {
         jobService.createJob(job);
-        return "Job created successfully!";
+        return new ResponseEntity<>("Job created successfully!", HttpStatus.CREATED);
     }
 
     //Note the {id} is the Query parameters
     @GetMapping("/jobs/{id}")
-    public Job findJobById(@PathVariable(value = "id") Long id) {
+    public ResponseEntity<Job> findJobById(@PathVariable(value = "id") Long id) {
         Job job = jobService.getJobById(id);
-        return job;
+        if (job != null) {
+            return new ResponseEntity<>(job, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 }
