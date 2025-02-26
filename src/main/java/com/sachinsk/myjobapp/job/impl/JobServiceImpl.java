@@ -5,8 +5,6 @@ import com.sachinsk.myjobapp.job.JobRepository;
 import com.sachinsk.myjobapp.job.JobService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,10 +36,10 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public boolean deleteJobById(Long id) {
-        try {
+        if (jobRepository.existsById(id)){
             jobRepository.deleteById(id);
             return true;
-        } catch (Exception e) {
+        } else {
             return false;
         }
     }

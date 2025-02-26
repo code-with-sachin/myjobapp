@@ -49,7 +49,7 @@ public class JobController {
         if (deleted) {
             return new ResponseEntity<>("Job Deleted Successfully", HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>("Job Not Found", HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("/{id}")
