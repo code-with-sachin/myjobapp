@@ -22,6 +22,13 @@ public class Company {
     public Company() {
     }
 
+    public Company(Long id, String name, String description, List<Job> jobs) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.jobs = jobs;
+    }
+
     public Long getId() {
         return id;
     }
