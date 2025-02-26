@@ -1,12 +1,25 @@
 package com.sachinsk.myjobapp.job;
 
+import jakarta.persistence.*;
+
+@Entity
+//@Table(name = "job_table")
 public class Job {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String description;
     private String minSalary;
     private String maxSalary;
     private String location;
+
+    //default constructor necessary when working with JPA - because entities are objects which represents the
+    //persistence data in Relational DB, Needed coz JPA needs to create instances of  entity Class while retrival of data..
+    //Since JPA uses Reflection to create instances of entities - It populates the properties from retrieved data from Database
+    //This is a requirement of JPA entities to have default No Args Constructor
+    public Job() {
+    }
 
     //Constructor
     public Job(Long id, String title, String description, String maxSalary, String minSalary, String location) {
