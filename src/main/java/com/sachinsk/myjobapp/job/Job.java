@@ -1,5 +1,6 @@
 package com.sachinsk.myjobapp.job;
 
+import com.sachinsk.myjobapp.company.Company;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,6 +14,9 @@ public class Job {
     private String minSalary;
     private String maxSalary;
     private String location;
+
+    @ManyToOne
+    private Company company;
 
     //default constructor necessary when working with JPA - because entities are objects which represents the
     //persistence data in Relational DB, Needed coz JPA needs to create instances of  entity Class while retrival of data..
@@ -32,6 +36,15 @@ public class Job {
     }
 
     //Getters and setters
+
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     public Long getId() {
         return id;
