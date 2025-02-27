@@ -41,4 +41,15 @@ public class ReviewServiceImpl implements ReviewService {
             return false;
         }
     }
+
+    @Override
+    public Review getReviewById(Long companyId, Long reviewId) {
+        Company company = companyService.getCompanyById(companyId);
+            //to get all reviews that exist in Review Table, then get specific review by company id
+            List<Review> reviews = getAllReviews(companyId);
+            return reviews.stream()
+                    .filter(review -> review.getId().equals(reviewId))
+                    .findFirst()
+                    .orElse(null);
+    }
 }
