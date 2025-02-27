@@ -23,7 +23,11 @@ public class ReviewController {
 
     @PostMapping("/reviews")
     public ResponseEntity<String> addReview(@PathVariable Long companyId, @RequestBody Review review){
-        reviewService.addReview(companyId, review);
-        return new ResponseEntity<>("Review added successfully", HttpStatus.CREATED);
+        boolean isReviewSaved = reviewService.addReview(companyId, review);
+        if (isReviewSaved) {
+            return new ResponseEntity<>("Review added successfully", HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>("Review not saved! As related Company does not exist", HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 }
